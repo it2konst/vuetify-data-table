@@ -7,6 +7,8 @@
 </script> -->
 
 <template>
+  <v-btn :to="{ path: '/about' }">Перейти на новую страницу</v-btn>
+  <router-link to="/about">Новая страница</router-link>
   <v-layout class="rounded rounded-md border">
     <v-app-bar title="Application bar">
       <template #append>
