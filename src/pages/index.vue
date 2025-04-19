@@ -1,10 +1,6 @@
-<!-- <template>
-  <HelloWorld />
-</template>
-
 <script lang="ts" setup>
-  //
-</script> -->
+//
+</script>
 
 <template>
   <v-btn :to="{ path: '/about' }">Перейти на новую страницу</v-btn>
@@ -13,8 +9,8 @@
     <v-app-bar title="Application bar">
       <template #append>
         <v-menu>
-          <template v-slot:activator="{ props }">
-            <v-avatar v-bind="props" size="50" color="surface-variant">
+          <template #activator="{ props }">
+            <v-avatar v-bind="props" color="surface-variant" size="50">
               <span>DK</span>
             </v-avatar>
           </template>
@@ -33,12 +29,12 @@
 
     <v-navigation-drawer>
       <v-list nav>
-        <v-list-item title="Navigation drawer" link></v-list-item>
+        <v-list-item link title="Navigation drawer"></v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-main class="d-flex align-center justify-center" height="300">
-      <RouterView />
+    <v-main class="d-flex align-center justify-center">
+      <HelloWorld />
     </v-main>
   </v-layout>
 </template>
