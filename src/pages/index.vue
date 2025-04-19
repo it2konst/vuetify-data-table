@@ -1,40 +1,7 @@
-<script lang="ts" setup>
-//
-</script>
-
 <template>
-  <v-btn :to="{ path: '/about' }">Перейти на новую страницу</v-btn>
-  <router-link to="/about">Новая страница</router-link>
-  <v-layout class="rounded rounded-md border">
-    <v-app-bar title="Application bar">
-      <template #append>
-        <v-menu>
-          <template #activator="{ props }">
-            <v-avatar v-bind="props" color="surface-variant" size="50">
-              <span>DK</span>
-            </v-avatar>
-          </template>
-          <v-list>
-            <v-list-item
-              v-for="(item, index) in ['Profile', 'Settings', 'Logout']"
-              :key="index"
-              :value="index"
-            >
-              <v-list-item-title>{{ item }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </template>
-    </v-app-bar>
-
-    <v-navigation-drawer>
-      <v-list nav>
-        <v-list-item link title="Navigation drawer"></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-main class="d-flex align-center justify-center">
-      <HelloWorld />
-    </v-main>
-  </v-layout>
+  <HelloWorld />
 </template>
+
+<script lang="ts" setup>
+  //
+</script>
