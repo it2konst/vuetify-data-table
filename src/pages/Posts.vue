@@ -1,9 +1,7 @@
 <template>
-  <v-app>
-    <router-view />
-  </v-app>
+  <h2>Posts</h2>
 </template>
 
 <script lang="ts" setup>
-  //
+//
 </script>
