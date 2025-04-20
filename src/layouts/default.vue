@@ -9,7 +9,7 @@ const drawer = ref(false);
       <template #prepend>
         <v-app-bar-nav-icon @click="drawer = !drawer" />
         <v-toolbar-title>
-          <router-link to="/" class="text-decoration-none on-surface text-subtitle-1"> Home </router-link>
+          <router-link to="/" class="text-decoration-none on-surface"> Home </router-link>
         </v-toolbar-title>
       </template>
       <template #append>
@@ -36,12 +36,19 @@ const drawer = ref(false);
     <v-navigation-drawer expand-on-hover rail v-model="drawer">
       <v-list density="compact" nav>
         <v-list-item prepend-icon="mdi-note-outline" title="Posts" to="/posts"> </v-list-item>
-        <v-list-item prepend-icon="mdi-comment-outline" title="Comments" to="/comments"></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-comment-outline"
+          title="Comments"
+          to="/comments"
+        ></v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-main class="d-flex align-center justify-center" height="300">
-      <router-view />
+    <v-main height="300">
+      <!-- <v-main class="d-flex align-center justify-center" height="300"> -->
+      <div class="pa-5">
+        <router-view />
+      </div>
     </v-main>
   </v-layout>
 </template>
