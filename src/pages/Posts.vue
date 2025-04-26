@@ -12,9 +12,20 @@ const posts = ref([
   { name: 'Donut', calories: 452 },
   { name: 'KitKat', calories: 518 },
 ]);
+
+const selected = ref([]);
+const search = ref('');
 </script>
 <template>
   <h2>Posts</h2>
+  <!-- {{ selected }} -->
+  <v-text-field
+    v-model="search"
+    append-icon="mdi-magnify"
+    label="Search"
+    single-line
+    hide-details
+  ></v-text-field>
   <!-- <v-table :height="300" :fixed-header="true" density="comfortable" :hover="true">
     <thead>
       <tr>
@@ -32,9 +43,16 @@ const posts = ref([
   <!-- sortable: false -->
   <v-data-table
     :headers="[
-      { title: 'Name', align: 'center', key: 'name' },
-      { title: 'Calories', align: 'center', key: 'calories' },
+      { title: 'Name', align: 'start', key: 'name' },
+      { title: 'Calories', align: 'start', key: 'calories' },
     ]"
     :items="posts"
+    show-select
+    item-value="name"
+    v-model="selected"
+    :search="search"
   />
+
+  <!-- :item-value="(item) => item.name + item.calories" -->
+  <!-- v-model="selected" -->
 </template>
