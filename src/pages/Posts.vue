@@ -15,7 +15,7 @@ const posts = ref([
 </script>
 <template>
   <h2>Posts</h2>
-  <v-table :height="300" :fixed-header="true" density="comfortable" :hover="true">
+  <!-- <v-table :height="300" :fixed-header="true" density="comfortable" :hover="true">
     <thead>
       <tr>
         <th class="text-left">Name</th>
@@ -28,5 +28,13 @@ const posts = ref([
         <td>{{ item.calories }}</td>
       </tr>
     </tbody>
-  </v-table>
+  </v-table> -->
+  <!-- sortable: false -->
+  <v-data-table
+    :headers="[
+      { title: 'Name', align: 'center', key: 'name' },
+      { title: 'Calories', align: 'center', key: 'calories' },
+    ]"
+    :items="posts"
+  />
 </template>

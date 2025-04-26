@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
-const drawer = ref(false);
+const drawer = ref(true);
 </script>
 
 <template>
@@ -33,7 +33,8 @@ const drawer = ref(false);
       </template>
     </v-app-bar>
 
-    <v-navigation-drawer expand-on-hover rail v-model="drawer">
+    <!-- <v-navigation-drawer expand-on-hover rail permanent v-model="drawer"> -->
+    <v-navigation-drawer v-model="drawer">
       <v-list density="compact" nav>
         <v-list-item prepend-icon="mdi-note-outline" title="Posts" to="/posts"> </v-list-item>
         <v-list-item
