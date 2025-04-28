@@ -26,21 +26,7 @@ const search = ref('');
     single-line
     hide-details
   ></v-text-field>
-  <!-- <v-table :height="300" :fixed-header="true" density="comfortable" :hover="true">
-    <thead>
-      <tr>
-        <th class="text-left">Name</th>
-        <th class="text-left">Calories</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in posts" :key="item.name">
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
-      </tr>
-    </tbody>
-  </v-table> -->
-  <!-- sortable: false -->
+
   <v-data-table
     :headers="[
       { title: 'Name', align: 'start', key: 'name' },
@@ -51,8 +37,28 @@ const search = ref('');
     item-value="name"
     v-model="selected"
     :search="search"
-  />
+  >
+    <template #item.name="{ item }">
+      <v-dialog max-width="500">
+        <template #activator="{ props: activatorProps }">
+          <span v-bind="activatorProps"> {{ item.name }}</span>
+        </template>
 
-  <!-- :item-value="(item) => item.name + item.calories" -->
-  <!-- v-model="selected" -->
+        <template #default="{ isActive }">
+          <v-card title="Dialog">
+            <v-card-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn text="Close Dialog" @click="isActive.value = false"></v-btn>
+            </v-card-actions>
+          </v-card>
+        </template>
+      </v-dialog>
+    </template>
+  </v-data-table>
 </template>
