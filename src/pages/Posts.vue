@@ -41,14 +41,13 @@ const search = ref('');
     <template #item.name="{ item }">
       <v-dialog max-width="500">
         <template #activator="{ props: activatorProps }">
-          <span v-bind="activatorProps"> {{ item.name }}</span>
+          <button v-bind="activatorProps">{{ item.name }}</button>
         </template>
 
         <template #default="{ isActive }">
           <v-card title="Dialog">
             <v-card-text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              {{ item.name }}
             </v-card-text>
 
             <v-card-actions>
