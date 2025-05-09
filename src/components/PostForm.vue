@@ -1,69 +1,84 @@
 <script lang="ts" setup>
 import { defineExpose, defineProps, ref } from 'vue';
+import type { Post } from '@/types/post';
 
-interface Post {
-  title: string;
-  tags: string[];
-  published: boolean;
-  body: string;
-  image: File[];
-  name: string;
-  calories: number;
-}
-
+// Данные из родительского компонента
 const props = defineProps<{ post: Partial<Post> }>();
 
-const formEl = ref(null);
-const form = ref({
+// Данные формы
+const form = ref<Partial<Post>>({
+  name: '',
+  calories: 0,
   title: '',
   tags: [],
   published: false,
   body: '',
   image: [],
-  name: '',
-  calories: 0,
   ...props.post,
 });
 
-// eslint-disable-next-line @stylistic/space-before-function-paren
-function handleSubmit() {
-  console.log('submitting', form.value);
-}
+// Варианты тегов
+const tagOptions = ['Рецепт', 'Десерт', 'Полезное', 'Быстрое', 'Праздничное'];
 
-const submit = () => handleSubmit();
+// Отправка формы
+const handleSubmit = () => {
+  console.log('Отправка формы:', form.value);
+  // TODO: Сохранить данные (например, отправить на сервер)
+  return form.value; // Возвращаем данные для родительского компонента
+};
 
-defineExpose({
-  submit,
-});
+// Доступ к функции отправки
+defineExpose({ submit: handleSubmit });
 </script>
 
 <template>
-  <v-form @submit.prevent="handleSubmit" ref="formEl">
-    <v-row align="center">
-      <v-col cols="3">
-        <v-switch v-model="form.published" label="Published"></v-switch>
-      </v-col>
-      <v-col cols="3">
-        <v-checkbox indeterminate v-model="form.published" label="Published"></v-checkbox>
+  <v-form @submit.prevent="handleSubmit">
+    <!-- Переключатель для "Опубликован" -->
+    <v-row align="center" class="mb-4">
+      <v-col cols="6">
+        <v-switch v-model="form.published" label="Опубликован" color="primary" />
       </v-col>
     </v-row>
-    <v-text-field v-model="form.title" label="Title" />
+    <!-- Поля формы -->
+    <v-text-field v-model="form.title" label="Заголовок" class="mb-4" variant="outlined" />
     <v-combobox
       v-model="form.tags"
-      :items="['News', 'Tutorial', 'Event']"
-      label="Tags"
+      :items="tagOptions"
+      label="Теги"
       multiple
       chips
-    ></v-combobox>
+      class="mb-4"
+      variant="outlined"
+    />
     <v-file-input
-      accept="image/png, image/jpeg, image/bmp"
-      placeholder="Upload a feature Image"
-      prepend-icon="mdi-magnify"
-      label="Feature Image"
       v-model="form.image"
-    ></v-file-input>
-    <v-textarea label="Post Body" v-model="form.body"></v-textarea>
-    <v-text-field v-model="form.name" label="Name" />
-    <v-text-field v-model="form.calories" label="Calories" />
+      accept="image/png, image/jpeg, image/bmp"
+      placeholder="Загрузить изображение"
+      prepend-icon="mdi-camera"
+      label="Изображение"
+      class="mb-4"
+      variant="outlined"
+    />
+    <v-textarea v-model="form.body" label="Текст поста" class="mb-4" variant="outlined" />
+    <v-text-field
+      v-model="form.name"
+      label="Название"
+      :rules="[(v) => !!v || 'Название обязательно']"
+      class="mb-4"
+      variant="outlined"
+    />
+    <v-text-field
+      v-model.number="form.calories"
+      label="Калории"
+      type="number"
+      class="mb-4"
+      variant="outlined"
+    />
   </v-form>
 </template>
+
+<style lang="scss" scoped>
+.mb-4 {
+  margin-bottom: 16px;
+}
+</style>
