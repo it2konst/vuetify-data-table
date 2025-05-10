@@ -15,7 +15,6 @@ const drawer = ref(true);
       <template #append>
         <v-menu>
           <template #activator="{ props }">
-            <!--#prepend --- variant="tonal" -->
             <v-avatar v-bind="props" color="primary" size="40" rounded="lg">
               <span class="text-h5">KB</span>
             </v-avatar>
@@ -33,7 +32,6 @@ const drawer = ref(true);
       </template>
     </v-app-bar>
 
-    <!-- <v-navigation-drawer expand-on-hover rail permanent v-model="drawer"> -->
     <v-navigation-drawer v-model="drawer">
       <v-list density="compact" nav>
         <v-list-item prepend-icon="mdi-note-outline" title="Posts" to="/posts"> </v-list-item>
@@ -42,11 +40,15 @@ const drawer = ref(true);
           title="Comments"
           to="/comments"
         ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-information-box-outline"
+          title="About"
+          to="/about"
+        ></v-list-item>
       </v-list>
     </v-navigation-drawer>
 
     <v-main height="300">
-      <!-- <v-main class="d-flex align-center justify-center" height="300"> -->
       <div class="pa-5">
         <router-view />
       </div>
