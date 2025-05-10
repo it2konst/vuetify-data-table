@@ -36,11 +36,14 @@ const searchQuery = ref('');
 // Ссылка на компонент формы
 const postFormRef = ref<InstanceType<typeof PostForm> | null>(null);
 
+const postSaved = ref(false);
+
 // Сохранение формы и закрытие окна
 const handleSave = async (isActive: any) => {
   try {
     postFormRef.value?.submit(); // Отправляем форму
     isActive.value = false; // Закрываем окно
+    postSaved.value = true;
   } catch (error) {
     console.error('Ошибка при сохранении:', error);
     // TODO: Показать пользователю ошибку (например, всплывающее сообщение)
@@ -55,6 +58,15 @@ const headers: DataTableHeader[] = [
 </script>
 
 <template>
+  <!-- <v-alert variant="tonal" type="success" closable title="Post Updated" v-model="postSaved" /> -->
+
+  <v-snackbar v-model="postSaved" :timeout="4000">
+    <div class="d-flex align-center">
+      <v-icon icon="mdi-check-circle" class="text-green pr-3"></v-icon>
+      Пост обновлен!
+    </div>
+  </v-snackbar>
+
   <h2>Посты</h2>
   <!-- Поле для поиска -->
   <v-text-field
