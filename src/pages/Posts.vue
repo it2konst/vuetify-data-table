@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import PostForm from '@/components/PostForm.vue';
 import type { Post } from '@/types/post';
+import { refAutoReset } from '@vueuse/core';
 
 // Интерфейс для заголовков таблицы (если тип VDataTable недоступен)
 interface DataTableHeader {
@@ -35,8 +36,9 @@ const selectedPosts = ref<string[]>([]);
 const searchQuery = ref('');
 // Ссылка на компонент формы
 const postFormRef = ref<InstanceType<typeof PostForm> | null>(null);
-
-const postSaved = ref(false);
+// Состояние для уведомления о сохранении поста
+// Используем refAutoReset для автоматического сброса состояния через 4 секунды
+const postSaved = refAutoReset(false, 4000);
 
 // Сохранение формы и закрытие окна
 const handleSave = async (isActive: any) => {
@@ -58,14 +60,21 @@ const headers: DataTableHeader[] = [
 </script>
 
 <template>
-  <!-- <v-alert variant="tonal" type="success" closable title="Post Updated" v-model="postSaved" /> -->
+  <v-alert
+    variant="tonal"
+    type="success"
+    closable
+    title="Post Updated"
+    v-model="postSaved"
+    class="mb-4"
+  />
 
-  <v-snackbar v-model="postSaved" :timeout="4000">
+  <!-- <v-snackbar v-model="postSaved" :timeout="4000">
     <div class="d-flex align-center">
       <v-icon icon="mdi-check-circle" class="text-green pr-3"></v-icon>
       Пост обновлен!
     </div>
-  </v-snackbar>
+  </v-snackbar> -->
 
   <h2>Посты</h2>
   <!-- Поле для поиска -->
