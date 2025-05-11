@@ -1,6 +1,17 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useTheme } from 'vuetify';
+
 const drawer = ref(true);
+const theme = useTheme();
+
+// Вычисляемое свойство, которое определяет, включена ли темная тема
+const isDarkTheme = computed(() => theme.global.current.value.dark);
+
+// Функция для переключения темы
+const toggleTheme = () => {
+  theme.global.name.value = isDarkTheme.value ? 'light' : 'dark';
+};
 </script>
 
 <template>
@@ -13,6 +24,10 @@ const drawer = ref(true);
         </v-toolbar-title>
       </template>
       <template #append>
+        <!-- Кнопка переключения темы -->
+        <v-btn icon class="mr-2" @click="toggleTheme">
+          <v-icon>{{ isDarkTheme ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
+        </v-btn>
         <v-menu>
           <template #activator="{ props }">
             <v-avatar v-bind="props" color="primary" size="40" rounded="lg">
